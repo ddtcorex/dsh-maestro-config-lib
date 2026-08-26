@@ -1,3 +1,7 @@
 node_modules/
 lib/
 *.log
+
+# agent rulebooks are source, not artifacts (global excludes ignores them)
+!AGENTS.md
+!CLAUDE.md

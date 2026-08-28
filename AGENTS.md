@@ -12,6 +12,7 @@ zero Cordis dependency, embedded by every plugin that needs settings.
 ## Rules
 
 - Default branch `master`; no direct commits — `feat/<topic>` PRs; conventional commits.
+- **Always request approval before merge or release:** never merge a PR/MR or publish a release (`git tag vX.Y.Z` / `pnpm publish` / `gh release`) without an explicit human approval — request review (`gh pr ready` / `gh pr request-review` / ask in chat) and wait for `APPROVED`.
 - One TDD task = one commit; never commit red.
 - Store format is versioned (`version: 1`); unknown domains/keys MUST survive round-trips.
 - Writes are validated ONLY for domains registered via `defineDomain`; never validate foreign domains.

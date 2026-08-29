@@ -1,9 +1,9 @@
 {
   "name": "@ddtcorex/dsh-maestro-config-lib",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "packageManager": "pnpm@11.7.0",
-  "description": "Maestro settings store library \u2014 atomic namespaced JSON store shared by dsh-maestro-* plugins (embedded dependency, no Cordis row)",
+  "description": "Maestro settings store library — atomic namespaced JSON store shared by dsh-maestro-* plugins (embedded dependency, no Cordis row)",
   "type": "module",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -22,8 +22,8 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "typescript": "^5.8.0",
-    "vitest": "^2.0.0",
-    "@types/node": "^22.0.0"
+    "vitest": "^2.0.0"
   }
 }

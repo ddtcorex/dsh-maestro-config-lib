@@ -424,6 +424,10 @@ const notifierValidator: DomainValidator = {
       if (v.telegram.botToken !== undefined && typeof v.telegram.botToken !== 'string') return {ok:false, error:'botToken string'}
       if (v.telegram.chatId !== undefined && typeof v.telegram.chatId !== 'string') return {ok:false, error:'chatId string'}
     }
+    if (v.policy !== undefined) {
+      if (typeof v.policy !== 'object' || v.policy === null || Array.isArray(v.policy)) return {ok:false, error:'policy must be object'}
+      if (v.policy.reviewNotifications !== undefined && typeof v.policy.reviewNotifications !== 'boolean') return {ok:false, error:'reviewNotifications boolean'}
+    }
     return {ok:true}
   }
 }

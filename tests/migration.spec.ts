@@ -122,3 +122,58 @@ describe('cache invalidation after late migration', () => {
     expect((second.domains.tunnel as any)?.mode).toBe('quick')
   })
 })
+
+describe('notify -> notifier domain migration', () => {
+  async function seedStore(doc: unknown): Promise<void> {
+    await mkdir(join(home, 'maestro'), { recursive: true })
+    await writeFile(STORE(), JSON.stringify(doc), { mode: 0o600 })
+  }
+
+  it('copies notify telegram+policy into notifier, snapshots, and removes notify', async () => {
+    const before = {
+      version: 1,
+      domains: {
+        notify: { telegram: { botToken: 'tg-SECRET', chatId: '42' }, policy: { reviewNotifications: true }, strayKey: 'x' },
+        tunnel: { mode: 'quick' },
+      },
+    }
+    await seedStore(before)
+    const doc = await load({ dshHome: home })
+    expect(doc.domains.notifier).toEqual({ telegram: { botToken: 'tg-SECRET', chatId: '42' }, policy: { reviewNotifications: true } })
+    expect(doc.domains.notify).toBeUndefined()
+    expect(doc.domains.tunnel).toEqual({ mode: 'quick' })
+    const bak = JSON.parse(await readFile(STORE() + '.maestro-notify-migrated.bak', 'utf8'))
+    expect(bak).toEqual(before)
+  })
+
+  it('skips when notifier already has a full telegram pair (newer config wins)', async () => {
+    await seedStore({
+      version: 1,
+      domains: {
+        notify: { telegram: { botToken: 'old', chatId: '1' } },
+        notifier: { telegram: { botToken: 'new', chatId: '2' } },
+      },
+    })
+    const doc = await load({ dshHome: home })
+    expect((doc.domains.notifier as any).telegram).toEqual({ botToken: 'new', chatId: '2' })
+    expect(doc.domains.notify).toBeDefined()
+    await expect(access(STORE() + '.maestro-notify-migrated.bak')).rejects.toThrow()
+  })
+
+  it('leaves the store untouched when notify has no telegram object', async () => {
+    const before = { version: 1, domains: { notify: { strayKey: 'x' } } }
+    await seedStore(before)
+    const doc = await load({ dshHome: home })
+    expect(doc.domains).toEqual(before.domains)
+    await expect(access(STORE() + '.maestro-notify-migrated.bak')).rejects.toThrow()
+  })
+
+  it('runs at most once', async () => {
+    await seedStore({ version: 1, domains: { notify: { telegram: { botToken: 't', chatId: 'c' } } } })
+    await load({ dshHome: home })
+    await load({ dshHome: home })
+    const doc = await load({ dshHome: home })
+    expect(doc.domains.notify).toBeUndefined()
+    expect((doc.domains.notifier as any).telegram).toEqual({ botToken: 't', chatId: 'c' })
+  })
+})

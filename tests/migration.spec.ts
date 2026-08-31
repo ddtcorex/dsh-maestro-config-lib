@@ -48,8 +48,9 @@ describe('legacy migration', () => {
       hostname: 'tunnel.example.com', credentialsFile: '/home/k/.cloudflared/cert.json',
       id: 'cf-123', mode: 'quick',
     })
-    expect((doc.domains.notify as any).telegram).toEqual({ botToken: 'tg-SECRET', chatId: '42' })
-    expect((doc.domains.notify as any).policy).toEqual({ reviewNotifications: false })
+    expect((doc.domains.notifier as any).telegram).toEqual({ botToken: 'tg-SECRET', chatId: '42' })
+    expect((doc.domains.notifier as any).policy).toEqual({ reviewNotifications: false })
+    expect(doc.domains.notify).toBeUndefined()
     // lastTunnelRunning is runtime state — dropped per spec
     expect(JSON.stringify(doc)).not.toContain('lastTunnelRunning')
   })

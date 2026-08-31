@@ -1,6 +1,6 @@
 {
   "name": "@ddtcorex/dsh-maestro-config-lib",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "packageManager": "pnpm@11.7.0",
   "description": "Maestro settings store library — atomic namespaced JSON store shared by dsh-maestro-* plugins (embedded dependency, no Cordis row)",

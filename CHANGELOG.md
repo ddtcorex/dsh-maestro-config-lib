@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.4] - 2026-09-02
+
+### Added
+
+- Map `lanPort`/`lanHost`/`lanPinEnabled` tunnel settings into `domains.tunnel` (local-PIN-gate, 2026-09-02).
+
 All notable changes to this project are documented in this file. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.5] - 2026-09-03
+
+### Removed
+
+- Drop dead `supervisorModel` → `supervisor.model` mapping, the `supervisor`
+  domain validator registration and the `supervisorValidator` export —
+  the supervisor runs a deterministic debug-agent without LLM, so nothing
+  reads this key anymore.
+
 ## [0.1.4] - 2026-09-02
 
 ### Added

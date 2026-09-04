@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6] - 2026-09-04
+
+### Added
+
+- Flat key `autoReviewOnAssign` → `gitlab.autoReviewOnAssign` for the
+  review plugin's global assign-trigger flag (review #70 / config #39).
+
 ## [0.1.5] - 2026-09-03
 
 ### Removed

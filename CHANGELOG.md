@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.7] - 2026-09-08
+
+### Fixed
+
+- **`load()` sees out-of-band store edits** — the memoized settings doc is
+  now keyed by file mtime: one stat per `load()`, re-read on drift, so
+  edits made by other processes surface without a host restart. Fail-open
+  on stat errors (serves the memoized doc, boot never breaks) (#23).
+
 ## [0.1.6] - 2026-09-04
 
 ### Added

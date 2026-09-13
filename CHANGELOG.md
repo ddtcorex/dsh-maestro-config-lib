@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0] - 2026-09-13
+
+### Added
+
+- Map `pinSessionTtlHours` into `domains.tunnel` so the PIN session lifetime
+  is configurable through the shared settings doc (#26).
+
+### Changed
+
+- Settings store lives under `dsh-maestro-config` (#25).
+
 ## [0.1.7] - 2026-09-08
 
 ### Fixed

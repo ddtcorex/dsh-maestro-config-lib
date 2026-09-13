@@ -7,7 +7,7 @@ zero Cordis dependency, embedded by every plugin that needs settings.
 ## Layout
 
 - `src/index.ts` — store (lock/atomic io/deep merge), domain validators, legacy migration.
-- `tests/{store,schema,migration}.spec.ts` — 19 tests, all contract-level.
+- `tests/{store,schema,migration}.spec.ts` — contract-level suites.
 
 ## Rules
 

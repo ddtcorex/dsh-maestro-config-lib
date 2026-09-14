@@ -6,8 +6,8 @@ zero Cordis dependency, embedded by every plugin that needs settings.
 
 ## Layout
 
-- `src/index.ts` — store (lock/atomic io/deep merge), domain validators, legacy migration.
-- `tests/{store,schema,migration}.spec.ts` — contract-level suites.
+- `src/index.ts` — store (lock/atomic io/deep merge), domain validators, flat-key adapters, `unset`.
+- `tests/{store,schema,adapter,unset}.spec.ts` + `validators.test.ts` — contract-level suites.
 
 ## Rules
 
@@ -16,4 +16,4 @@ zero Cordis dependency, embedded by every plugin that needs settings.
 - One TDD task = one commit; never commit red.
 - Store format is versioned (`version: 1`); unknown domains/keys MUST survive round-trips.
 - Writes are validated ONLY for domains registered via `defineDomain`; never validate foreign domains.
-- Migration is one-shot and non-destructive: consumed legacy → `.bak`, corrupt → skipped untouched.
+- No in-code migrations: one-shot store cleanups run as throwaway scripts, never as boot code (single-operator setup).
